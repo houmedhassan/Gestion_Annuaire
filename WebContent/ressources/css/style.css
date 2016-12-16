@@ -1,0 +1,151 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	background-color: #ADD8E6;	
+}
+
+.container{
+	background-color:  	#F5F5DC;
+	margin: 50px 100px 0px 100px;
+}
+
+#menu_h {
+	padding: 0; margin: 0;
+	font-size: 14px;
+	text-align:right;
+}
+#menu_h li {
+	display: inline;
+}
+
+#menu_right{
+	text-align:right;
+}
+
+#menu_h a{
+	display:inline-block;
+	margin: 0 10px;
+}
+
+#lien_update{
+	text-align: right;
+}
+
+#blockImageUSERNAME{
+	font-size: 20px;
+	background-color: #D3D3D3;
+}
+#blockImageUSERNAME li{
+	display: inline;
+}
+#block_Image{
+	width:200px;
+	
+}
+
+#block_Username{
+ font-family: "Times New Roman", Times, serif;	
+}
+
+#info_Person{
+	padding-left:20px;
+}
+
+hr{
+	color:black;
+}
+
+
+/*css pour le tableau */
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+table, td, th {
+    border: 1px solid black;
+}
+
+table{
+	border-collapse: collapse;
+	width:100%;
+}
+
+/* css pour le label et le resultat de l'erreur qui seront affichés */
+
+
+
+label{
+	display:inline-block;
+	width : 200px;
+	padding: 5px 0px 15px 10px;
+}
+
+.error{
+	color:red;
+	font-style: italic;
+	font-size:16px;
+}
+
+#menu input{
+	width:300px;
+}
+
+#deconnexion{
+	font-size:16px;
+	font-style:oblique;
+}
+
+
+/* css pour le formulaire */
+	
+/* -- css pour la page d'authentification  --*/
+#container-form{
+	position: relative
+	
+}
+
+#bienvenue{
+
+	font-size:24px;
+	text-align:center;
+	text-decoration: underline;
+}
+
+
+.imgcontainer {
+
+    text-align: center;
+}
+
+#button{
+	text-align:center;
+}
+
+#button button{
+	width:200px;
+}
+
+/* -- css pour la page d'ajout --*/
+
+#formAjout label{
+	
+    width: 250px;
+    float: left;
+    font-size: 16px;
+
+}
+
+#formAjout input{
+	width:525px;
+}
+
+#formAjout select{
+	width:525px;
+}
+

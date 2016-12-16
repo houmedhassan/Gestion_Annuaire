@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset >
+	<person idPerson="1" lastName="reol" firstName="dombo" mail="haha@hotmail.fr" 
+			webSite="tata.com" birthDay="1928-03-01" password="kakako" idGroup="1"/>
+			
+	<person idPerson="2" lastName="Rébecca" firstName="Armand" mail="Saint-Didier-des-Bois"
+		    webSite="ara.com" birthDay="1929-02-03" password="lskss" idGroup="1"/>
+		    
+ 	<person idPerson="3" lastName="Aimée" firstName="Hebert" mail="Marigny-le-Châtel" 
+ 			webSite="bore.fr" birthDay="2016-12-02" password="msmsekdl" idGroup="1"/>
+ 			
+ 	<person idPerson="4" lastName="Marielle" firstName="Ribeiro" mail="Maillères" 
+ 			webSite="ofr.fd" birthDay="2012-07-03" password="eod,sld" idGroup="2"/>
+</dataset>
