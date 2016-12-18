@@ -134,7 +134,24 @@
 		    <artifactId>spring-security-config</artifactId>
 		    <version>4.2.0.RELEASE</version>
 		</dependency>
+		
+		<!-- dependencies for mail sender -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
 			
-	
 	</dependencies>
 </project>

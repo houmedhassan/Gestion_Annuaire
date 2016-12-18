@@ -10,7 +10,11 @@
 	<title>Description d'une personne</title>
 </head>
 <body>
-
+	
+		<c:if test="${empty user.idPerson}">
+			<c:redirect url="/annuaires/annuaire/home"/>
+		</c:if>
+	
 	<div class="container">
 		
 		<div id="menu">
@@ -37,8 +41,9 @@
 		
 			<fieldset>
 				<legend> Votre Description </legend>
+				<c:if test="${user.idPerson ==pers.idPerson }">
 				<div id="lien_update"> <a href="editPersonForm?idPerson=${pers.idPerson }"> Mise à jour </a></div>
-				
+				</c:if>
 				<ul id="blockImageUSERNAME">
 					<li id="block_Image">
 					

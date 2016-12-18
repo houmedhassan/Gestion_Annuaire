@@ -9,12 +9,14 @@
 </head>
 <body>
 	<div class="container">
-		
+		<c:if test="${empty user.idPerson}">
+			<c:redirect url="/annuaires/annuaire/home"/>
+		</c:if>
 		<div id="menu">
 			<nav class="navbar navbar-inverse">
 				 <div class="container-fluid">
 					 <ul class="nav navbar-nav">
-						 <li><a href="person?idPerson=${user.idPerson }">Profil</a></li>
+						 <li><a href="person?idPerson=${user.idPerson}">Profil</a></li>
 					     <li><a href="listofGroup">Liste de groupe </a></li>
 					     <li><a href="#">Liste des Personnes </a></li>
 					 </ul>

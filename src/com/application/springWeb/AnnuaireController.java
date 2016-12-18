@@ -1,31 +1,21 @@
 package com.application.springWeb;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.Validator;
 
 import com.application.beans.Group;
 import com.application.beans.Person;
@@ -79,23 +69,23 @@ public class AnnuaireController {
 										@ModelAttribute(value="loginPers") Person person, BindingResult result,ModelMap modelMap,
 										@RequestParam (value="mail") String mail, @RequestParam (value="password")String password){
 		
+		
 		authentificationValidator.validate(person, result);
 		if(result.hasErrors()){
 				return new ModelAndView( "accueil");
 		}
 		
 		person = authentificationValidator.login(mail, password,person, result);
-		//req.getSession().getAttribute("user");
-		session=req.getSession();
-		session.setAttribute("user", person);
-		
 		if(result.hasErrors()){
 			return new ModelAndView( "accueil");
 		}
 		
-		//session.setAttribute("user", person);
+		session.setAttribute("idPerson", person.getIdPerson());
 		
-		return new ModelAndView( "person", "pers", person);
+		modelMap.addAttribute("pers", person);
+		modelMap.addAttribute("user", person);
+		
+		return new ModelAndView( "person");
 	}
 	
 	
@@ -145,6 +135,7 @@ public class AnnuaireController {
 
 	@ModelAttribute("listGroup")
 	Collection<Group> groups(){
+		
 	    return personDao.findAllGroups();
 	}
 	/**
@@ -157,7 +148,8 @@ public class AnnuaireController {
 	 * 
 	 */
 	@RequestMapping(value = "/listofGroup", method = RequestMethod.GET)
-	public String listGroup() throws DaoException {
+	public String listGroup(ModelMap modelMap, HttpServletRequest req) throws DaoException {
+		Person p = (Person) req.getSession().getAttribute("user");
 		return "listofGroup";
 	}
 
@@ -243,4 +235,38 @@ public class AnnuaireController {
 		
 		return "ResultatRecherche";
 	}
+	
+	
+	/*
+	 * password recovery. 
+	 */
+
+	/**
+	 * 
+	 * @param idPerson
+	 * @return the page for passwordRecovery
+	 */
+	@RequestMapping(value="/formPasswordRecovery", method =RequestMethod.GET)
+	public String formPasswordRecovery(){
+		return "formPasswordRecovery";
+	}
+	
+	@RequestMapping(value="/passwordRecovery", method=RequestMethod.POST)
+	public ModelAndView passwordRecovery(@RequestParam(value="mail") String mail, 
+										@ModelAttribute(value="recovery") Person person, BindingResult result) throws DaoException{
+		
+		authentificationValidator.validate(person, result);
+		if(result.hasErrors()){
+				return new ModelAndView("formPasswordRecovery");
+		}
+		
+		person = authentificationValidator.sendMailPasswordRecovery(mail, person, result);
+		if(result.hasErrors()){
+			return  new ModelAndView("formPasswordRecovery");
+		}
+		String message="pour la reinitialisation de votre mot de passe, un mail vous été envoyé";
+		return new ModelAndView("redirect:/accueil","message", message);
+	}
+	
+	
 }

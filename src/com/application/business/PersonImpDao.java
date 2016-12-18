@@ -220,6 +220,15 @@ public class PersonImpDao implements PersonDao{
 		return person;
 	}
 
+	@Override
+	public Person findPersons(String mail) {
+		// TODO Auto-generated method stub
+		Person person = null;
+		String sql="SELECT * FROM person where mail=? ";
+		person = this.jdbcTemplate.queryForObject(sql, new Object[]{mail}, personMapper);
+		return person;
+	}
+
 }
 
 

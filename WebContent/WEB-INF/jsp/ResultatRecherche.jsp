@@ -9,15 +9,18 @@
 	<title>Liste des personnes </title>
 </head>
 <body>
+		<c:if test="${empty user.idPerson}">
+			<c:redirect url="/annuaires/annuaire/home"/>
+		</c:if>
 	<div class="container">
 		
 		<div id="menu">
 			<nav class="navbar navbar-inverse">
 				 <div class="container-fluid">
 					 <ul class="nav navbar-nav">
-						 <li><a href="person?idPerson=${user.idPerson }">Profil</a></li>
+						 <li><a href="person?idPerson=${user.idGroup}">Profil</a></li>
 					     <li><a href="listofGroup">Liste de groupe </a></li>
-					     <li><a href="#">Liste des Personnes </a></li>
+					   <li><a href="listofPerson?idGroup=${user.idGroup}">Liste des Personnes </a></li>
 					 </ul>
 					 <form class="navbar-form navbar-right" action="recherche?search=search">
 					 <div class="form-group">

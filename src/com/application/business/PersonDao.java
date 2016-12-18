@@ -15,6 +15,8 @@ public interface PersonDao {
 		 * @return  existing group list in the database
 		 */
 	   Collection<Group> findAllGroups();
+	   
+	   
 
 	   /**
 	    * @param groupId 
@@ -76,5 +78,11 @@ public interface PersonDao {
 	   * @return the person who is connected where the parameter mail and password match.
 	   */
 	  Person loginPerson(String mail, String password);
+	  
+	  /**
+	   * @return  existing person in the database and contain the parameter mail
+	   */
+	  Person findPersons(String mail);
+
 	   
 }

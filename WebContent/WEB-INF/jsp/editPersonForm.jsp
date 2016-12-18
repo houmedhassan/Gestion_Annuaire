@@ -1,6 +1,7 @@
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ include file="/WEB-INF/jsp/include.jsp"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,6 +12,9 @@
 
 </head>
 <body>
+		<c:if test="${empty sessionScope.user.idPerson}">
+			<c:redirect url="/annuaires/annuaire/home"/>
+		</c:if>
 	<div class="container">
 		
 		<div id="menu">
@@ -19,7 +23,7 @@
 					 <ul class="nav navbar-nav">
 						 <li><a href="person?idPerson=${user.idPerson }">Profil</a></li>
 					     <li><a href="listofGroup">Liste de groupe </a></li>
-					     <li><a href="#">Liste des Personnes </a></li>
+					     <li><a href="listofPerson?idGroup=${user.idGroup}">Liste des Personnes </a></li>
 					 </ul>
 					 <form class="navbar-form navbar-right" action="recherche?search=search">
 					 <div class="form-group">

@@ -70,7 +70,7 @@ public class Test {
 		
 		//test of the method findPerson
 		System.out.println("********************** La personne à rechercher *****************************");
-		Person findperson = persondao.loginPerson("houmedhassan@outlook.com", "123456");
+		Person findperson = persondao.findPersons("houmedhassan@outlook.com");
 		System.out.println(findperson.getIdPerson() +" \t "+findperson.getFirstName()+"\t " +findperson.getLastName());
 		
 		//test of the method findPerson

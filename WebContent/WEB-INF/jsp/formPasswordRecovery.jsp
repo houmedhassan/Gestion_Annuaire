@@ -13,40 +13,26 @@
 	<div class="container">
 		
 		
-		<div id="bienvenue">Bienvenue sur la page d'accueil du gestion d'annuaire.</div>	
+		<div id="bienvenue">Veuillez renseigner votre adresse mail pour pouvoir reinitialiser votre mot de passe.</div>	
 		<hr>
 		<div class="container-form">
 		 <div class="modal-dialog">
   
 	      <div class="modal-body">
-		<form:form action="log" modelAttribute="loginPers" method="POST" class="form-horizontal">
-			<div>
-				<c:if test="${not empty message }">
-					<c:out value="${message }"></c:out>
-				</c:if>
-			</div>
+		<form:form action="passwordRecovery" modelAttribute="recovery" method="POST" class="form-horizontal">
 			<div class="imgcontainer">
 		    	<img src="<c:url value="/ressources/images/profil-image.png"/>" alt="profil-image"  class="loginAvatar" width="200" heigth="150"/>
 		  	</div>
 			<form:errors path="mail" cssClass="error"/>  <br/>
-			<form:errors path="password" cssClass="error"/>	<br/>
-				
-				
+			  
 			    <div class="form-group">
 	              <input type="text" name="mail" class="form-control input-lg" placeholder="saisir votre EMAIL">
-	            </div>
-	            
-	            <div class="form-group">
-	              <input type="password"  name="password"  class="form-control input-lg"placeholder="Saisir votre Password">
-	            </div>
-	          	        
-			        
-			    <div class="form-group" id="button">
-	              <span class="pull-right"><a href="formPasswordRecovery">mot de passe Perdu !!!</a></span><br/>
-	              <button type="submit" class="btn btn-success btn-lg">se connecter</button>
-			 	  <a href="ajoutform"> <button type="button" class="btn btn-primary btn-lg">s'inscrire</button></a>
-	              
-	            </div>
+	            </div>           
+	           			        
+			<div class="form-group" id="button">
+	       	  <button type="submit" class="btn btn-success btn-lg">Valider</button>
+			  <a href="home"> <button type="button" class="btn btn-danger btn-lg">Annuler</button></a>      
+	        </div>
   		</form:form>
   		
   		</div>
