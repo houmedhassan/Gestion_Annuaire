@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="container">
-		<h2> Ajout d'une Personne </h2>
+		<h2> Formulaire d'inscription </h2>
 		
 		<hr>
 		<form:form  method="POST" modelAttribute="pers" action="addPerson" id="formAjout">

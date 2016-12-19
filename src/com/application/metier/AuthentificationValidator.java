@@ -1,9 +1,6 @@
 package com.application.metier;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -33,7 +30,10 @@ public class AuthentificationValidator implements Validator{
 		// TODO Auto-generated method stub
 		return Person.class.isAssignableFrom(perso);
 	}
-
+	
+	/**
+	 * this function verif if the password and mail is not empty
+	 */
 	@Override
 	public void validate(Object target, Errors error) {
 		// TODO Auto-generated method stub
@@ -49,7 +49,7 @@ public class AuthentificationValidator implements Validator{
 	 * @param password
 	 * @param target
 	 * @param error
-	 * @return
+	 * @return the person whose connected
 	 */
 	public Person login(String mail, String password, Object target, Errors error){
 		Person pers = (Person) target;

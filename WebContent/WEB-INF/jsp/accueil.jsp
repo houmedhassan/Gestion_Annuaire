@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<c:url value="/ressources/css/style.css" />" >
-	<title>Liste des personnes </title>
+	<title>Page d'accueil </title>
 </head>
 <body>
 	<div class="container">
@@ -20,9 +20,12 @@
   
 	      <div class="modal-body">
 		<form:form action="log" modelAttribute="loginPers" method="POST" class="form-horizontal">
-			<div>
+			<div class="error">
 				<c:if test="${not empty param.message }">
 					<c:out value="${param.message }"></c:out>
+				</c:if>
+				<c:if test="${not empty message }">
+					<c:out value="${message }"></c:out>
 				</c:if>
 			</div>
 			<div class="imgcontainer">

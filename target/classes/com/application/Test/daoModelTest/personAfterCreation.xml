@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 	<person lastName="reol" firstName="dombo" mail="haha@hotmail.fr" 
-			webSite="tata.com" birthDay="1928-03-01" password="kakako" idGroup="1"/>
+			webSite="tata.com" birthDay="1928-03-01" password="Kakako2!" idGroup="1"/>
 			
-	<person lastName="Rébecca" firstName="Armand" mail="Saint-Didier-des-Bois"
-		    webSite="ara.com" birthDay="1929-02-03" password="lskss" idGroup="1"/>
+	<person lastName="Rébecca" firstName="Armand" mail="SaintBois@gmail.com"
+		    webSite="ara.com" birthDay="1929-02-03" password="lsKss4;" idGroup="1"/>
 		    
- 	<person lastName="Aimée" firstName="Hebert" mail="Marigny-le-Châtel" 
- 			webSite="bore.fr" birthDay="2016-12-02" password="msmsekdl" idGroup="1"/>
+ 	<person lastName="Aimée" firstName="Hebert" mail="Marigny@hotmail.com" 
+ 			webSite="bore.fr" birthDay="2016-12-02" password="M2smsekdl," idGroup="1"/>
  			
- 	<person lastName="Marielle" firstName="Ribeiro" mail="Maillères" 
- 			webSite="ofr.fd" birthDay="2012-07-03" password="eod,sld" idGroup="2"/>
+ 	<person lastName="Marielle" firstName="Ribeiro" mail="Mailleres@yahoo.fr" 
+ 			webSite="ofr.fd" birthDay="2012-07-03" password="Eod,sld4" idGroup="2"/>
     
     <person lastName="Bob" firstName="Alice" mail="azerty@amu-mrs.fr" 
- 			webSite="AliceBob.com" birthDay="2016-12-31" password="Password123" idGroup="1"/>
+ 			webSite="AliceBob.com" birthDay="2016-12-31" password="Password123!" idGroup="1"/>
 </dataset>

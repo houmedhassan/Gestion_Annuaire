@@ -1,13 +1,20 @@
 package com.application.Test.springWebTest;
 
-import java.util.regex.Pattern;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.concurrent.TimeUnit;
-import org.junit.*;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.openqa.selenium.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class WebDriverTest {
   private WebDriver driver;
@@ -24,36 +31,9 @@ public class WebDriverTest {
 
   @Test
   public void testWebDriver() throws Exception {
-    try {
-      assertEquals("Page d'accueil Bienvenue sur la page d'accueil du gestion d'annuaire.\n \n \n \n \n \n \n \n mot de passe Perdu !!!\n se connecter s'inscrire", driver.findElement(By.cssSelector("html")).getText());
-    } catch (Error e) {
-      verificationErrors.append(e.toString());
-    }
-    assertTrue(isElementPresent(By.id("bienvenue")));
-    try {
-      assertEquals("Bienvenue sur la page d'accueil du gestion d'annuaire.", driver.findElement(By.id("bienvenue")).getText());
-    } catch (Error e) {
-      verificationErrors.append(e.toString());
-    }
-    assertTrue(isElementPresent(By.cssSelector("div.container")));
-    assertTrue(isElementPresent(By.cssSelector("div.imgcontainer")));
-    try {
-      assertEquals("", driver.findElement(By.cssSelector("div.imgcontainer")).getText());
-    } catch (Error e) {
-      verificationErrors.append(e.toString());
-    }
-    assertTrue(isElementPresent(By.name("mail")));
-    try {
-      assertEquals("", driver.findElement(By.name("mail")).getText());
-    } catch (Error e) {
-      verificationErrors.append(e.toString());
-    }
-    assertTrue(isElementPresent(By.name("password")));
-    try {
-      assertEquals("", driver.findElement(By.name("password")).getText());
-    } catch (Error e) {
-      verificationErrors.append(e.toString());
-    }
+    driver.get(baseUrl + "/ProjetJEE1/annuaires/annuaire/home");
+    assertTrue(isElementPresent(By.cssSelector("body")));
+    assertTrue(isElementPresent(By.cssSelector("div.container-form")));
     assertTrue(isElementPresent(By.xpath("//button[@type='submit']")));
     try {
       assertEquals("se connecter", driver.findElement(By.xpath("//button[@type='submit']")).getText());
@@ -66,17 +46,21 @@ public class WebDriverTest {
     } catch (Error e) {
       verificationErrors.append(e.toString());
     }
-    assertTrue(isElementPresent(By.linkText("mot de passe Perdu !!!")));
+    driver.get(baseUrl + "/ProjetJEE1/annuaires/annuaire/ajoutform");
+    assertTrue(isElementPresent(By.cssSelector("fieldset")));
+    assertTrue(isElementPresent(By.xpath("//button[@type='submit']")));
     try {
-      assertEquals("mot de passe Perdu !!!", driver.findElement(By.linkText("mot de passe Perdu !!!")).getText());
+      assertEquals("Valider", driver.findElement(By.xpath("//button[@type='submit']")).getText());
     } catch (Error e) {
       verificationErrors.append(e.toString());
     }
-    driver.get(baseUrl + "/ProjetJEE1/annuaires/annuaire/home");
-    assertTrue(isElementPresent(By.cssSelector("html")));
+    assertTrue(isElementPresent(By.xpath("//button[@type='button']")));
+    try {
+      assertEquals("Annuler", driver.findElement(By.xpath("//button[@type='button']")).getText());
+    } catch (Error e) {
+      verificationErrors.append(e.toString());
+    }
   }
-  
-  
 
   @After
   public void tearDown() throws Exception {

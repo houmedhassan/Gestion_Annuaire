@@ -1,15 +1,13 @@
 package com.application.Test.metierTest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.validation.BindException;
-import org.springframework.validation.Validator;
 
 import com.application.beans.Person;
-import com.application.metier.AnnuaireValidator;
 import com.application.metier.AuthentificationValidator;
 
 public class AuthentificationValidatorTest {
@@ -62,7 +60,7 @@ public class AuthentificationValidatorTest {
 	    assertFalse(errors.hasErrors());
 	}
 	
-	/*@Test
+	@Test
 	public void validatelogin(){
 		authentificationValidator = new AuthentificationValidator();
 
@@ -75,7 +73,7 @@ public class AuthentificationValidatorTest {
 		authentificationValidator.login(a, b, person, errors);
 	    assertFalse(errors.hasErrors());
 	}
-	 */
+	 
     
 	
 	

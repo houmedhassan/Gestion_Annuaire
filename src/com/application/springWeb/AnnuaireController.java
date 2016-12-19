@@ -1,9 +1,8 @@
 package com.application.springWeb;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,13 +59,13 @@ public class AnnuaireController {
 	}
 	/**
 	 * 
-	 * @param req
 	 * @param person
 	 * @param result
 	 * @param modelMap
 	 * @param mail
 	 * @param password
-	 * @return
+	 * @return the person whose connected.
+	 * this method 
 	 */
 	@RequestMapping(value="/log", method=RequestMethod.POST)
 	public ModelAndView loginVerify( /*HttpServletRequest req, HttpSession session, */
@@ -78,8 +77,17 @@ public class AnnuaireController {
 		if(result.hasErrors()){
 				return new ModelAndView( "accueil");
 		}
-		
-		person = authentificationValidator.login(mail, password,person, result);
+		String passwordEncrypte=null;
+		try {
+			passwordEncrypte =  validator.encrypterPasswordPerson(password);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		person = authentificationValidator.login(mail, passwordEncrypte,person, result);
 		if(result.hasErrors()){
 			return new ModelAndView( "accueil");
 		}
@@ -96,6 +104,13 @@ public class AnnuaireController {
 	}
 	
 	
+	/**
+	 * 
+	 * @param person
+	 * @param request
+	 * @param status
+	 * @return the home after the user was disconnected and remove the session
+	 */
 	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(@ModelAttribute("user") Person person, WebRequest request, SessionStatus status){
 		//session.removeAttribute("user");
@@ -116,11 +131,12 @@ public class AnnuaireController {
 	}
 	
 	/**
+	 * 
 	 *  this method verif the data of form and add the person in database
 	 * @param person
 	 * @param bindingResult
 	 * @param modelMap
-	 * @return
+	 * @return the home page after the person is add in database
 	 * @throws DaoException
 	 */
 	@RequestMapping(value="/addPerson", method=RequestMethod.POST)
@@ -130,11 +146,21 @@ public class AnnuaireController {
 			
 		//AnnuaireValidator annuaireValidator = new AnnuaireValidator();
 		validator.validate(person, bindingResult);
+		try {
+			person.setPassword(validator.encrypterPasswordPerson(person.getPassword()));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(bindingResult.hasErrors()){
 			//List <FieldError> lst = bindingResult.getFieldErrors();
 			return "ajoutPersonForm";
 		}else{
 			modelMap.put("pers", person);
+			modelMap.put("message", "insciption reussi. vous pouvez vous connecter");
 			//person.setPassword();
 			personDao.savePerson(person);
 			return "accueil";
@@ -226,11 +252,27 @@ public class AnnuaireController {
 			return "editPersonForm";
 		}else{
 			modelMap.put("pers", person);
+			try {
+				person.setPassword(validator.encrypterPasswordPerson(person.getPassword()));
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			personDao.editPerson(person.getIdPerson(), person);
 			return "person";
 		}
 	}
 	
+	/**
+	 * 
+	 * @param person
+	 * @param searchValue
+	 * @param modelMap
+	 * @return the search result
+	 */
 	@RequestMapping(value="/recherche", method =RequestMethod.GET)
 	public String recherche(@ModelAttribute("user") Person person,@RequestParam(value="search") String searchValue, ModelMap modelMap){
 		
