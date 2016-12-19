@@ -12,7 +12,7 @@
 
 </head>
 <body>
-		<c:if test="${empty sessionScope.user.idPerson}">
+		<c:if test="${empty user.idPerson}">
 			<c:redirect url="/annuaires/annuaire/home"/>
 		</c:if>
 	<div class="container">

@@ -21,8 +21,8 @@
 	      <div class="modal-body">
 		<form:form action="log" modelAttribute="loginPers" method="POST" class="form-horizontal">
 			<div>
-				<c:if test="${not empty message }">
-					<c:out value="${message }"></c:out>
+				<c:if test="${not empty param.message }">
+					<c:out value="${param.message }"></c:out>
 				</c:if>
 			</div>
 			<div class="imgcontainer">

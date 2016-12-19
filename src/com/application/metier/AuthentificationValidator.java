@@ -58,7 +58,7 @@ public class AuthentificationValidator implements Validator{
 		try{
 		person= personDao.loginPerson(mail, password);
 		}catch(Exception ex){
-			error.rejectValue("password", "person.password", "veuillez resaisir votre email ou votre mot de passe");
+			error.rejectValue("password", "person.password", "veuillez resaisir votre email et/ou votre mot de passe");
 		}
 		
 		return person;
@@ -71,14 +71,12 @@ public class AuthentificationValidator implements Validator{
 	 * @param error
 	 * @throws DaoException
 	 */
-	public Person sendMailPasswordRecovery( String mail, Object target, Errors error) throws DaoException{
-		Person pers = (Person) target;
-		Person person =null;
-		person= personDao.findPersons(mail);
-			if(person==null){
-				error.rejectValue("mail", "person.mail", "desole votre mail n'est pas correcte, il est inconnu de nous");
-			}else{
-				SimpleMailMessage message = new SimpleMailMessage(this.templateMessage);
+	public Person sendMailPasswordRecovery( String mail, Object target, Errors error) {
+		
+		Person person =(Person) target;
+		try{	
+		person= personDao.findPersons(mail);	
+			SimpleMailMessage message = new SimpleMailMessage(this.templateMessage);
 				message.setTo(person.getLastName());
 				message.setText("Monsieur ou Madame votre Mot de passe est : "+person.getPassword());
 				try {
@@ -86,7 +84,10 @@ public class AuthentificationValidator implements Validator{
 				} catch (MailException ex) {
 					error.rejectValue("mail", "person.mail", "desole il y a eu une erreur");
 				}
-			}
+		}catch(Exception e){
+			error.rejectValue("mail", "person.mail", "desole votre mail n'est pas correcte, il est inconnu de nous");
+			
+		}
 		return person;
 	}
 	

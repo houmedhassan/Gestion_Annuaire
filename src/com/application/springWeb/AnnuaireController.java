@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.application.beans.Group;
@@ -26,6 +29,7 @@ import com.application.metier.AuthentificationValidator;
 
 @Controller()
 @RequestMapping("/annuaire")
+@SessionAttributes("user")
 public class AnnuaireController {
 
 	@Autowired
@@ -65,7 +69,7 @@ public class AnnuaireController {
 	 * @return
 	 */
 	@RequestMapping(value="/log", method=RequestMethod.POST)
-	public ModelAndView loginVerify( HttpServletRequest req, HttpSession session, 
+	public ModelAndView loginVerify( /*HttpServletRequest req, HttpSession session, */
 										@ModelAttribute(value="loginPers") Person person, BindingResult result,ModelMap modelMap,
 										@RequestParam (value="mail") String mail, @RequestParam (value="password")String password){
 		
@@ -80,19 +84,24 @@ public class AnnuaireController {
 			return new ModelAndView( "accueil");
 		}
 		
-		session.setAttribute("idPerson", person.getIdPerson());
+		if(!modelMap.containsAttribute("user")) {
+		      modelMap.addAttribute("user", person);
+		    }
+		//session.setAttribute("idPerson", person.getIdPerson());
 		
 		modelMap.addAttribute("pers", person);
-		modelMap.addAttribute("user", person);
+		//modelMap.addAttribute("user", person);
 		
 		return new ModelAndView( "person");
 	}
 	
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
-	public String logout(HttpSession session){
-		session.removeAttribute("user");
-		return "accueil";
+	public String logout(@ModelAttribute("user") Person person, WebRequest request, SessionStatus status){
+		//session.removeAttribute("user");
+		status.setComplete();
+		request.removeAttribute("user", WebRequest.SCOPE_SESSION);
+		return "redirect:/";
 	}
 	
 	/**
@@ -148,8 +157,8 @@ public class AnnuaireController {
 	 * 
 	 */
 	@RequestMapping(value = "/listofGroup", method = RequestMethod.GET)
-	public String listGroup(ModelMap modelMap, HttpServletRequest req) throws DaoException {
-		Person p = (Person) req.getSession().getAttribute("user");
+	public String listGroup(@ModelAttribute("user") Person person, ModelMap modelMap/*, HttpServletRequest req*/) throws DaoException {
+		//Person p = (Person) req.getSession().getAttribute("user");
 		return "listofGroup";
 	}
 
@@ -161,7 +170,7 @@ public class AnnuaireController {
 	 * 
 	 */
 	@RequestMapping(value="/listofPerson", method =RequestMethod.GET)
-	public ModelAndView listPerson(@RequestParam(value = "idGroup") Long value){
+	public ModelAndView listPerson(@ModelAttribute("user") Person person,@RequestParam(value = "idGroup") Long value){
 		
 		
 		Collection<Person> listPerson = null;
@@ -195,7 +204,7 @@ public class AnnuaireController {
 	 * @throws DaoException 
 	 */
 	@RequestMapping(value="/editPersonForm", method=RequestMethod.GET)
-	public ModelAndView editPersonForm(@RequestParam(value="idPerson") Long idPerson) throws DaoException{
+	public ModelAndView editPersonForm(@ModelAttribute("user") Person person, @RequestParam(value="idPerson") Long idPerson) throws DaoException{
 		Person pers = personDao.findPerson(idPerson);
 		return new ModelAndView("editPersonForm", "pers", pers);
 	}
@@ -208,7 +217,7 @@ public class AnnuaireController {
 	 * @throws DaoException
 	 */
 	@RequestMapping(value="/editPerson", method =RequestMethod.POST)
-	public String personUpdate(	@ModelAttribute(value="pers") Person person, BindingResult result, ModelMap modelMap) throws DaoException{
+	public String personUpdate(@ModelAttribute("user") Person per,	@ModelAttribute(value="pers") Person person, BindingResult result, ModelMap modelMap) throws DaoException{
 		
 		//AnnuaireValidator annuaireValidator = new AnnuaireValidator();
 		validator.validate(person, result);
@@ -223,7 +232,7 @@ public class AnnuaireController {
 	}
 	
 	@RequestMapping(value="/recherche", method =RequestMethod.GET)
-	public String recherche(@RequestParam(value="search") String searchValue, ModelMap modelMap){
+	public String recherche(@ModelAttribute("user") Person person,@RequestParam(value="search") String searchValue, ModelMap modelMap){
 		
 		Collection <Person> persons = personDao.searchPersonByName(searchValue, searchValue);
 		modelMap.addAttribute("listPersonRecherche",persons);

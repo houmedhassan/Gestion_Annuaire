@@ -10,10 +10,11 @@
 	<title>Description d'une personne</title>
 </head>
 <body>
-	
-		<c:if test="${empty user.idPerson}">
+	<c:choose>
+		<c:when test="${empty user.idPerson}">
 			<c:redirect url="/annuaires/annuaire/home"/>
-		</c:if>
+		</c:when>
+	</c:choose>
 	
 	<div class="container">
 		
@@ -21,7 +22,7 @@
 			<nav class="navbar navbar-inverse">
 				 <div class="container-fluid">
 					 <ul class="nav navbar-nav">
-						 <li><a href="#">Profil</a></li>
+						 <li><a href="person?idPerson=${user.idPerson }">Profil</a></li>
 					     <li><a href="listofGroup">Liste de groupe </a></li>
 					     <li><a href="listofPerson?idGroup=${pers.idGroup }">Liste de personne</a></li>
 					 </ul>

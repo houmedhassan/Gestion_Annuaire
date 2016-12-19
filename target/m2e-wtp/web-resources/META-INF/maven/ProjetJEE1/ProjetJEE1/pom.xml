@@ -134,7 +134,30 @@
 		    <artifactId>spring-security-config</artifactId>
 		    <version>4.2.0.RELEASE</version>
 		</dependency>
+		<!-- dependencies mockito pour le test du couche metier -->
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-all</artifactId>
+		    <version>1.10.19</version>
+		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-core</artifactId>
+		    <version>2.3.5</version>
+		</dependency>
+		
+		<!-- dependences de selenium, test d'interface web -->
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-java</artifactId>
+		    <version>3.0.1</version>
+		</dependency>
+
+				
 		<!-- dependencies for mail sender -->
 		<dependency>
 			<groupId>javax.mail</groupId>
